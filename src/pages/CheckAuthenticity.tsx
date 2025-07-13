@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Search, Heart } from 'lucide-react';
+import { Search, MapPin, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import Map from '@/components/Map';
 import villageScene1 from '@/assets/village-scene-1.jpg';
 import villageScene2 from '@/assets/village-scene-2.jpg';
 import villageScene3 from '@/assets/village-scene-3.jpg';
@@ -101,7 +100,8 @@ const CheckAuthenticity = () => {
             <div className="space-y-8 animate-fade-in">
               {/* Village Name */}
               <div className="text-center">
-                <h3 className="text-3xl font-bold text-earth-brown mb-2">
+                <h3 className="text-3xl font-bold text-earth-brown mb-2 flex items-center justify-center gap-2">
+                  <MapPin className="h-8 w-8 text-primary" />
                   {villageData.name}
                 </h3>
               </div>
@@ -119,12 +119,22 @@ const CheckAuthenticity = () => {
                 ))}
               </div>
 
-              {/* Interactive Map */}
-              <Map 
-                latitude={villageData.coordinates.lat}
-                longitude={villageData.coordinates.lng}
-                villageName={villageData.name}
-              />
+              {/* Map Placeholder */}
+              <Card className="h-80 rounded-3xl overflow-hidden shadow-[var(--shadow-soft)] border-0 relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-gentle-rose/20 to-soft-peach/30 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto shadow-lg">
+                      <MapPin className="h-8 w-8 text-primary-foreground" />
+                    </div>
+                    <div className="text-earth-brown">
+                      <h4 className="font-semibold text-lg">{villageData.name}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Lat: {villageData.coordinates.lat}, Lng: {villageData.coordinates.lng}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
 
               {/* Thank You Message */}
               <Card className="p-8 bg-gradient-to-r from-gentle-rose/10 to-soft-peach/20 border-0 rounded-3xl shadow-[var(--shadow-soft)]">
